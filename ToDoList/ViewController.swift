@@ -22,7 +22,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        addItem()
+        //вызов добавления элемента при появлении view
+        //addItem()
     }
     
     
