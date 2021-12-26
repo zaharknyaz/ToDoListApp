@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A6CF91B2777C58F005CA982 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CF91A2777C58F005CA982 /* TableViewCell.swift */; };
 		3ADE97B02775076F00ABB150 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE97AF2775076F00ABB150 /* AppDelegate.swift */; };
 		3ADE97B22775076F00ABB150 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE97B12775076F00ABB150 /* SceneDelegate.swift */; };
 		3ADE97B42775076F00ABB150 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE97B32775076F00ABB150 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A6CF91A2777C58F005CA982 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		3ADE97AC2775076E00ABB150 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ADE97AF2775076F00ABB150 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ADE97B12775076F00ABB150 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				3ADE97AF2775076F00ABB150 /* AppDelegate.swift */,
 				3ADE97B12775076F00ABB150 /* SceneDelegate.swift */,
+				3A6CF91A2777C58F005CA982 /* TableViewCell.swift */,
 				3ADE97B32775076F00ABB150 /* ViewController.swift */,
 				3ADE97B52775076F00ABB150 /* Main.storyboard */,
 				3ADE97B82775077000ABB150 /* Assets.xcassets */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ADE97B42775076F00ABB150 /* ViewController.swift in Sources */,
+				3A6CF91B2777C58F005CA982 /* TableViewCell.swift in Sources */,
 				3ADE97B02775076F00ABB150 /* AppDelegate.swift in Sources */,
 				3ADE97B22775076F00ABB150 /* SceneDelegate.swift in Sources */,
 			);

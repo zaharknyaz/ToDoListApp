@@ -7,12 +7,25 @@
 
 import UIKit
 
+class ToDoItem {
+    var text: String
+    var isCompleted: Bool
+    init(text: String) {
+        self.text = text
+        self.isCompleted = false
+    }
+}
+
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //сделать сохранение в памяти(в CoreData)
-    var items: [String] = ["to do item 1", "to do item 2", "to do item 3"]
+    var items: [ToDoItem] = [ToDoItem(text: "to do item 1"), ToDoItem(text: "to do item 2"), ToDoItem(text:"to do item 3")]
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var imageAdd: UIImageView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +45,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = items[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        cell.initCell(item: items[indexPath.row])
+        //устанавливаем текст ячейки со стилем(style) basic
+        //cell.textLabel?.text = items[indexPath.row]
         return cell
     }
     
@@ -45,7 +60,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let addButton = UIAlertAction(title: "Add", style: .default) { (alertAction) in
             if ac.textFields?[0].text != "" {
-                self.items.insert(ac.textFields?[0].text ?? "", at: 0)
+                self.items.insert(ToDoItem(text: ac.textFields?[0].text ?? ""), at: 0)
                 //перезагрузить таблицу
                 //self.tableView.reloadData()
                 self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
@@ -63,3 +78,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 }
 
+//добавление нового элемента
+extension ViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var y = scrollView.contentOffset.y
+        if y < -100 {
+            //можно сделать пружинную анимацию плюса перед тем как появится окно добавления элемента
+            y = -100
+        }
+        
+        if y < -20 {
+            imageAdd.alpha = 1
+            imageAdd.frame = CGRect(x: 0, y: 98, width: UIScreen.main.bounds.size.width, height: -y)
+        }else {
+            imageAdd.alpha = 0
+        }
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView.contentOffset.y < -100 {
+            addItem()
+        }
+    }
+}
