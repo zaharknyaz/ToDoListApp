@@ -37,6 +37,12 @@ class TableViewCell: UITableViewCell {
         }else {
             imageCheck.image = UIImage(systemName: "circle")
         }
+        
+        UIView.animate(withDuration: 0.2) {
+            self.imageCheck.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        } completion: {(bool) in
+            self.imageCheck.transform = .identity
+        }
     }
     
     func addTap() {
@@ -48,11 +54,6 @@ class TableViewCell: UITableViewCell {
     func tap() {
         item.isCompleted = !item.isCompleted
         setChecked()
-        UIView.animate(withDuration: 0.2) {
-            self.imageCheck.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        } completion: {(bool) in
-            self.imageCheck.transform = .identity
-        }
     }
     
     func addPan() {
@@ -93,6 +94,17 @@ class TableViewCell: UITableViewCell {
                 return
             }
             
+            //добавить иконку (label) mark as read (unread) - показывать иконку при оттягивании вправо
+            //поменять состояние
+            if dx > 60 {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.viewParent.transform = .identity
+                }) { (bool) in
+                    self.item.isCompleted = !self.item.isCompleted
+                    self.setChecked()
+                }
+            }
+
             UIView.animate(withDuration: 0.2) {
                 //self.viewParent.center = self.centerParentView
                 self.viewParent.transform = .identity
