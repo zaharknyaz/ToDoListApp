@@ -16,16 +16,25 @@ class ToDoItem {
     }
 }
 
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //сделать сохранение в памяти(в CoreData)
-    var items: [ToDoItem] = [ToDoItem(text: "to do item 1"), ToDoItem(text: "to do item 2"), ToDoItem(text:"to do item 3")]
+    var items: [ToDoItem] = [ToDoItem(text: "Сделал дело"), ToDoItem(text: "Гуляй смело")]
+    
+    //удаляем элемент
+    func deleteItem(itemIndex: Int) {
+        items.remove(at: itemIndex)
+        tableView.deleteRows(at: [IndexPath(row: itemIndex, section: 0)], with: .automatic)
+        
+        //обновляем таблицу после удаления через 0.3 секунды
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.3, execute: {
+            self.tableView.reloadData()
+        })
+            
+    }
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imageAdd: UIImageView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +48,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //addItem()
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        cell.initCell(item: items[indexPath.row])
+        cell.initCell(item: items[indexPath.row], itemIndex: indexPath.row, viewController: self)
         //устанавливаем текст ячейки со стилем(style) basic
         //cell.textLabel?.text = items[indexPath.row]
         return cell
